@@ -57,7 +57,7 @@ csvwriter = csv.writer(file, delimiter = ',')
 
 print("Found PM2.5 sensor, reading data...")
 
-while now <= 30:
+while True:
     time.sleep(1)
 
     try:
