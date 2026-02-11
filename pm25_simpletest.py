@@ -92,7 +92,7 @@ while True:
     csvwriter.writerow(meta)
     
     
-    for i in len(particle_list):
+    for i in range(len(particle_list)):
         nowtime = time.time()
         value = particle_list[i] + "/ 0.1L air:" + aqdata[particle_list[i]]
         csvwriter.writerow([nowtime, value])
