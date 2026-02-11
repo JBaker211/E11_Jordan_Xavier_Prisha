@@ -2,7 +2,7 @@ import csv
 import time
 import numpy as np
 
-file = open('test.csv', 'w', newline = None)
+file = open('data/test.csv', 'w', newline = None)
 csvwriter = csv.writer(file, delimiter = ',')
 
 meta = ['time', 'data']
