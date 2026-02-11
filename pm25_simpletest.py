@@ -5,6 +5,9 @@
 Example sketch to connect to PM2.5 sensor with either I2C or UART.
 """
 
+import csv
+import numpy as np
+
 import time
 
 import board
@@ -45,9 +48,16 @@ pm25 = PM25_UART(uart, reset_pin)
 # Connect to a PM2.5 sensor over I2C
 #pm25 = PM25_I2C(i2c, reset_pin)
 
+now = time.time()
+meta = ['time'] 
+particle_list = ["particles 0.3um", "particles 0.5um", "particles 1.0um", "particles 2.5um", "particles 5.0um", "particles 100um"]
+meta = meta+particle_list
+file = open('data/pm25_simpletest.csv', 'w', newline = None)
+csvwriter = csv.writer(file, delimiter = ',')
+
 print("Found PM2.5 sensor, reading data...")
 
-while True:
+while now <= 30:
     time.sleep(1)
 
     try:
@@ -78,3 +88,15 @@ while True:
     print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
+    
+    csvwriter.writerow(meta)
+    
+    
+    for i in len(particle_list):
+        nowtime = time.time()
+        value = particle_list[i] + "/ 0.1L air:" + aqdata[particle_list[i]]
+        csvwriter.writerow([nowtime, value])
+
+    now += 1
+
+file.close()
