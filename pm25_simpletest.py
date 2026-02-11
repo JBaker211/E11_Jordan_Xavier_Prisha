@@ -50,7 +50,7 @@ pm25 = PM25_UART(uart, reset_pin)
 
 now = time.time()
 meta = ['time'] 
-particle_list = ["particles 0.3um", "particles 0.5um", "particles 1.0um", "particles 2.5um", "particles 5.0um", "particles 100um"]
+particle_list = ["particles 03um", "particles 05um", "particles 10um", "particles 25um", "particles 50um", "particles 100um"]
 meta = meta+particle_list
 file = open('data/pm25_simpletest.csv', 'w', newline = None)
 csvwriter = csv.writer(file, delimiter = ',')
