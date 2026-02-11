@@ -11,7 +11,7 @@ csvwriter.writerow(meta)
 
 for i in range(10):
     now = time.time
-    value = np.random.randome()
+    value = np.random.random()
     csvwriter.writerow([now, value])
 
 file.close()
