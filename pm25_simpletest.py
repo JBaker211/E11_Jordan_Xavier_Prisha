@@ -62,7 +62,8 @@ print("Found PM2.5 sensor, reading data...")
 
 while now < stop:
     time.sleep(1)
-
+    now = time.time()
+    
     try:
         aqdata = pm25.read()
         # print(aqdata)
@@ -91,11 +92,14 @@ while now < stop:
     print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
-        
     
-    for i in range(len(particle_list)):
-        nowtime = time.time()
-        value = str(aqdata[particle_list[i]])
-        csvwriter.writerow([nowtime, value])
+    nowtime = time.time()
+    value1 = aqdata["particles 03um"]
+    value2 = aqdata["particles 05um"])
+    value3 = aqdata["particles 10um"])
+    value4 = aqdata["particles 25um"])
+    value5 = aqdata["particles 50um"])
+    value6 = aqdata["particles 100um"])
+    csvwriter.writerow([nowtime, value1, value2, value3, value4, value5, value6])
         
 file.close()
