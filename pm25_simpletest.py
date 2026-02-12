@@ -1,3 +1,4 @@
+
 # SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
@@ -95,11 +96,11 @@ while now < stop:
     
     nowtime = time.time()
     value1 = aqdata["particles 03um"]
-    value2 = aqdata["particles 05um"])
-    value3 = aqdata["particles 10um"])
-    value4 = aqdata["particles 25um"])
-    value5 = aqdata["particles 50um"])
-    value6 = aqdata["particles 100um"])
+    value2 = aqdata["particles 05um"]
+    value3 = aqdata["particles 10um"]
+    value4 = aqdata["particles 25um"]
+    value5 = aqdata["particles 50um"]
+    value6 = aqdata["particles 100um"]
     csvwriter.writerow([nowtime, value1, value2, value3, value4, value5, value6])
         
 file.close()
