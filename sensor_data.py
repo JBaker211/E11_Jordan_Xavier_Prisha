@@ -25,7 +25,7 @@ bme680.sea_level_level = 1013.25
 
 now = time.time()
 
-stop = runtime*60
+stop = now + runtime*60
 
 reset_pin = None
 
