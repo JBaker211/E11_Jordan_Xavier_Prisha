@@ -50,31 +50,27 @@ while now < stop:
 	press = ("Pressure: %0.3f hPa " % bme680.pressure)
 	alt = ("Altitude = %0.2f meters " % bme680.altitude)
 	value7 =bme680.temperature
-  value8 =bme680.gas
-  value9 =bme680.relative_humidity
-  value10 =bme680.pressure
-  value11 = bme680.altitude
+	value8 =bme680.gas
+	value9 =bme680.relative_humidity
+	value10 =bme680.pressure
+	value11 = bme680.altitude
 	data_string = [temp, gas, hum, press, alt]
-  for i, data in enumerate(data_weather):
-		data_string[i] += str(data)
+	
+	try:
+	  aqdata = pm25.read()
+	  # print(aqdata)
+	except RuntimeError:
+	  print("Unable to read from sensor, retrying...")
+	  continue
     
-  try:
-      aqdata = pm25.read()
-      # print(aqdata)
-  except RuntimeError:
-      print("Unable to read from sensor, retrying...")
-      continue
-    
-  nowtime = time.time()
-  value1 = aqdata["particles 03um"]
-  value2 = aqdata["particles 05um"]
-  value3 = aqdata["particles 10um"]
-  value4 = aqdata["particles 25um"]
-  value5 = aqdata["particles 50um"]
-  value6 = aqdata["particles 100um"]
-
-  csvwriter.writerow([nowtime, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11])
-
-  
+	nowtime = time.time()
+	value1 = aqdata["particles 03um"]
+	value2 = aqdata["particles 05um"]
+	value3 = aqdata["particles 10um"]
+	value4 = aqdata["particles 25um"]
+	value5 = aqdata["particles 50um"]
+	value6 = aqdata["particles 100um"]
+	
+	csvwriter.writerow([nowtime, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11])
         
 file.close()
