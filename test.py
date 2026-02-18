@@ -1,6 +1,10 @@
 import csv
 import time
 import numpy as np
+import sys
+
+arguments = sys.argv
+print(arguments)
 
 file = open('data/test.csv', 'w', newline = None)
 csvwriter = csv.writer(file, delimiter = ',')
