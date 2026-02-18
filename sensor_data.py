@@ -43,6 +43,8 @@ csvwriter.writerow(meta)
 
 
 while now < stop:
+	time.sleep(1)
+	now = time.time()
 	data_weather = [now, bme680.temperature, bme680.gas, bme680.relative_humidity , bme680.pressure , bme680.altitude]
 	temp = ("Temperature: %0.1f c " % bme680.temperature)
 	gas = ("Gas: %d ohm: " % bme680.gas)
