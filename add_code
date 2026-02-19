@@ -1,0 +1,50 @@
+import numpy as np 
+import panda as pd
+import matplotlib.pyplot as plt
+
+# inside data analysis
+
+inside_data = pd.read_csv('test.csv')
+inside_column_name_list = list(inside_data.columns)
+inside_standard_deviations = []
+inside_standard_means = []
+
+for i in range(inside_data.shape[1]):
+    inside_column_data = inside_data[inside_column_name_list[i]] 
+    inside_standard_deviations.append(np.std(inside_column_data))
+    inside_standard_means.append(inside_standard_deviations[i] / np.sqrt(len(inside_column_data)))
+
+# outside data analysis
+
+outside_data = pd.read_csv('test.csv')
+outside_column_name_list = list(outside_data.columns)
+outside_standard_deviations = []
+outside_standard_means = []
+
+for i in range(outside_data.shape[1]):
+    outside_column_data = outside_data[outside_column_name_list[i]]
+    outside_standard_deviations.append(np.std(outside_column_data))
+    outside_standard_means.append(outside_standard_deviations[i] / np.sqrt(len(outside_column_data)))
+
+# average standard deviations
+average_standard_deviation = np.sqrt(np.array(inside_standard_deviations)**2 + np.array(outside_standard_deviations)**2)
+
+# data comparison 
+
+for i in range(len(outside_standard_means)):
+    if ((inside_standard_means[i] <= (3 * average_standard_deviation[i]+ inside_standard_means[i]) and (inside_standard_means[i] >= (inside_standard_means[i] - 3 * average_standard_deviation[i])))):
+        inside_deviation = "Yes"
+    else:
+        inside_deviation = "No"
+    if ((outside_standard_means[i] <= (3 * average_standard_deviation[i]+ outside_standard_means[i]) and (outside_standard_means[i] >= (outside_standard_means[i] - 3 * average_standard_deviation[i])))):
+        outside_deviation = "Yes"
+    else:
+        outside_deviation = "No"
+    if inside_deviation == "Yes" and outside_deviation == "Yes":
+        print(f"{inside_column_name_list[i]}: Both inside and outside data are comparable.")
+    elif inside_deviation == "Yes" and outside_deviation == "No":
+        print(f"{inside_column_name_list[i]}: Inside data is significantly different from outside data.")
+    elif inside_deviation == "No" and outside_deviation == "Yes":
+        print(f"{inside_column_name_list[i]}: Outside data is significantly different from inside data.")   
+    else:        
+        print(f"{inside_column_name_list[i]}: Both inside and outside data are not comparable.")
